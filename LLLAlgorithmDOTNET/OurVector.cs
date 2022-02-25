@@ -35,7 +35,7 @@ public class OurVector
     {
         OurVector v = new OurVector();
         OurVector Reducer = new OurVector();
-        Reducer.basis = b.basis.Select(c => { c = c * (-1); return c; }).ToList();
+        Reducer.basis = b.basis.Select( c => c * (-1)).ToList();
         v = Addition(a, Reducer);
         return v;
     }
