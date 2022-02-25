@@ -22,7 +22,7 @@ public class OurVector
     public static OurVector Multiply(OurVector a, double j)
     {
         OurVector v = new OurVector();
-        v.basis = a.basis.Select(c => { c = c * j; return c; }).ToList();
+        v.basis = a.basis.Select( c => c * j).ToList();
         return v;
     }
 
