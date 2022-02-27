@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLLAlgorithmDOTNET", "LLLAlgorithmDOTNET\LLLAlgorithmDOTNET.csproj", "{ADFB5F15-4355-4183-88EF-AB3FBDBD759D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLLAlgorithmDOTNET", "LLLAlgorithmDOTNET\LLLAlgorithmDOTNET.csproj", "{ADFB5F15-4355-4183-88EF-AB3FBDBD759D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLLAlgorithmDOTNETTests", "LLLAlgorithmDOTNETTests\LLLAlgorithmDOTNETTests.csproj", "{2CDA35F9-A4CD-4C7E-8910-7E3BB6593EE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{ADFB5F15-4355-4183-88EF-AB3FBDBD759D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFB5F15-4355-4183-88EF-AB3FBDBD759D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADFB5F15-4355-4183-88EF-AB3FBDBD759D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CDA35F9-A4CD-4C7E-8910-7E3BB6593EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CDA35F9-A4CD-4C7E-8910-7E3BB6593EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CDA35F9-A4CD-4C7E-8910-7E3BB6593EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CDA35F9-A4CD-4C7E-8910-7E3BB6593EE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

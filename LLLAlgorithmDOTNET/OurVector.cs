@@ -51,9 +51,9 @@ public class OurVector
     {
         OurVector v = new OurVector();
         v.basis = vector.basis.Select(c => { c = c * 1 / scalar; return c; }).ToList();
-        return vector;
+        return v;
     }
-    public static void LLLAlgorithm(List<OurVector> OurWorkingVectors)
+    public static List<OurVector> LLLAlgorithm(List<OurVector> OurWorkingVectors)
     {
         int k = 1;
         Console.WriteLine("Our bases are:");
@@ -78,27 +78,33 @@ public class OurVector
         }
 
         List<OurVector> OurGramSchmidtVectors = new List<OurVector>();
-        double u10;
+        double u;
         for (int n = 0; n < OurWorkingVectors.Count; n++)
         {
             OurGramSchmidtVectors.Add(new OurVector());
-            OurGramSchmidtVectors[n] = OurGramSchmidtReduction(OurWorkingVectors[n], n, OurGramSchmidtVectors);
         }
 
         while (k < OurWorkingVectors.Count)
         {
-
-
-            u10 = OurSizeCondition(OurWorkingVectors[k], OurGramSchmidtVectors[k - 1]);  //b1,Gb0           
-            Console.WriteLine(u10);
-            if (u10 >= 0.5)
+            for (int n = 0; n < OurWorkingVectors.Count; n++)
             {
-                OurWorkingVectors[k] = OurModifyVector(OurWorkingVectors[k], OurWorkingVectors[k - 1], u10);
+                OurGramSchmidtVectors[n] = OurGramSchmidtReduction(OurWorkingVectors[n], n, OurGramSchmidtVectors, OurWorkingVectors);
             }
 
-            u10 = OurSizeCondition(OurWorkingVectors[k], OurGramSchmidtVectors[k - 1]);
+            
 
-            if (OurLovasvCondition(OurGramSchmidtVectors[k - 1], OurGramSchmidtVectors[k], u10))
+            for (int i = k - 1; i >= 0; i--)
+            {
+                u = OurSizeCondition(OurWorkingVectors[k], OurGramSchmidtVectors[i]);
+                if (u > 0.5)
+                {
+                    OurWorkingVectors[k] = OurModifyVector(k, OurWorkingVectors, u, i);
+                }
+                
+            }
+
+            u = OurSizeCondition(OurWorkingVectors[k], OurGramSchmidtVectors[k - 1]);
+            if (OurLovasvCondition(OurGramSchmidtVectors[k - 1], OurGramSchmidtVectors[k], u))
             {
                 //Console.WriteLine("true");
                 k = k + 1;
@@ -110,21 +116,7 @@ public class OurVector
             else
             {
                 OurWorkingVectors = OurSwapWorkingVectors(OurWorkingVectors, k);
-                k = Math.Max(k - 1, 1);
-
-                for (int n = 0; n < OurWorkingVectors.Count; n++)
-                {
-                    if (n == 0)
-                    {
-                        OurGramSchmidtVectors.Add(new OurVector());
-                        OurGramSchmidtVectors[n] = OurWorkingVectors[n];
-                    }
-                    else
-                    {
-                        OurGramSchmidtVectors.Add(new OurVector());
-                        OurGramSchmidtVectors[n] = OurGramSchmidtReduction(OurWorkingVectors[n], n, OurGramSchmidtVectors);
-                    }
-                }
+                k = Math.Max(k - 1, 1);    
             }
         }
 
@@ -150,17 +142,28 @@ public class OurVector
             }
             Console.WriteLine(vector);
         }
+
+        return OurWorkingVectors;
     }
 
     public static double OurSizeCondition(OurVector va, OurVector vb)
     {
         return Math.Abs((OurVector.Multiply(va, vb)) / (OurVector.Multiply(vb, vb)));
     }
-    public static OurVector OurModifyVector(OurVector vb, OurVector va, double vu)
+    public static OurVector OurModifyVector(int k, List<OurVector> OurWorkingVectors, double u, int i)
     {
-        vb = OurVector.Subtract(vb, OurVector.Multiply(va, Math.Round(vu)));
-        return vb;
+
+        OurVector suma = OurVector.Subtract(OurWorkingVectors[k], OurVector.Multiply(OurWorkingVectors[i], Math.Round(u)));
+             
+        return suma;
     }
+
+
+    /*public static OurVector OurModifyVector(OurVector va, OurVector vb, double vu)
+    {
+        va = OurVector.Subtract(va, OurVector.Multiply(vb, Math.Round(vu)));
+        return va;
+    }*/
     public static bool OurLovasvCondition(OurVector Ga, OurVector Gb, double u)
     {
         if ((Gb.basis[0] * Gb.basis[0] + Gb.basis[1] * Gb.basis[1]) >= (0.75 - u * u) * Ga.basis[0] * Ga.basis[0] + Ga.basis[1] * Ga.basis[1])
@@ -169,13 +172,14 @@ public class OurVector
         }
         return false;
     }
-    public static OurVector OurGramSchmidtReduction(OurVector va, int n, List<OurVector> OurGramSchmidtVectors) //https://www.youtube.com/watch?v=zHbfZWZJTGc
+    public static OurVector OurGramSchmidtReduction(OurVector va, int n, List<OurVector> OurGramSchmidtVectors, List<OurVector> OurWorkingVectors) //https://www.youtube.com/watch?v=zHbfZWZJTGc
     {
         OurVector suma = new OurVector();
-        for (int i = 0; i < va.basis.Count; i++)
+        suma.basis = va.basis;
+        /*for (int i = 0; i < va.basis.Count; i++)
         {
             suma.basis.Add(va.basis[i]);
-        }
+        }*/
         if (n == 0)
         {
             return va;

@@ -20,9 +20,9 @@ namespace LLLAlgorithm
 
             var OurWorkingVectors = new List<OurVector>() 
             {
-             new OurVector() {basis = {47, 215}},
-             new OurVector() {basis = {95, 460}},
-             //místo pro další vektory
+             new OurVector() {basis = {1 , 1, 1}},
+             new OurVector() {basis = {-1, 0, 2}},
+             new OurVector() {basis = {3 , 5, 6}},
             };
                        
 
