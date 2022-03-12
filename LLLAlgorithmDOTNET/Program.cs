@@ -18,16 +18,24 @@ namespace LLLAlgorithm
             //3 Dimensional test values b0= 1;1;1 b1=-1;0;2 b2=3;5;6
             //3 Dimensional test values b0= 1;-1;1 b1=1;0;1 b2=1;1;2
 
-            var OurWorkingVectors = new List<OurVector>() 
+            var WorkingVectors = new List<Vector>() 
             {
-             new OurVector() {basis = {1 , 1, 1}},
-             new OurVector() {basis = {-1, 0, 2}},
-             new OurVector() {basis = {3 , 5, 6}},
+             new Vector() {basis = {1 , 1, 1}},
+             new Vector() {basis = {-1, 0, 2}},
+             new Vector() {basis = {3 , 5, 6}},
             };
-                       
-
-            OurVector.LLLAlgorithm(OurWorkingVectors);
-
+            
+            Console.WriteLine(WorkingVectors[0].ToString());
+            Console.WriteLine(WorkingVectors[1].ToString());
+            Console.WriteLine(WorkingVectors[2].ToString());
+            
+            Console.WriteLine();
+            WorkingVectors = Vector.LLLAlgorithm(WorkingVectors);
+            Console.WriteLine();
+            
+            Console.WriteLine(WorkingVectors[0].ToString());
+            Console.WriteLine(WorkingVectors[1].ToString());
+            Console.WriteLine(WorkingVectors[2].ToString());
 
             Console.ReadKey();
 
